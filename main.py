@@ -8,6 +8,9 @@ cad_icon = Image.open("cad.png")
 graph_icon = Image.open("graph.png")
 nav = ["Plotter", "Home", "Labs"]
 Part_A = ["Question 1a", "Question 1b"]
+
+instuctions = " 1.	Copy data into an excel sheet.\n 2.	Make sure that x-axis data is in the first column and the first cell of the column has the axis title.\n 3.	Save the sheet in .csv format.\n 4.	Name the file what you want as the Plot title.\n 5.	Upload the file.\n 6.	Change the plot preferences from the sidebar as required."
+
 with st.beta_expander("Navigation"):
     col1, col2= st.beta_columns(2)
     with col2: 
@@ -36,6 +39,8 @@ with st.beta_expander("Navigation"):
             st.image(home_icon, use_column_width=True)
         elif navi == "Plotter":
             #st.image(graph_icon, use_column_width=True)
+            st.subheader("Instructions")
+            st.write(instuctions)
             pass
 
 if navi == "Home":
