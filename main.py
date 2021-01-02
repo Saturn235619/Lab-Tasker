@@ -56,5 +56,16 @@ if navi == "Plotter":
     l_plt = st.sidebar.checkbox("Do you need a line plot?".title())
     grad = st.sidebar.checkbox("Do you need to calculate gradient of Line of best fit?".title())
     grad_calc = st.sidebar.checkbox("Do you need to show calculations for gradient of Line of best fit?".title())
-    plotter = Plotter(l_best, l_plt)
-    plotter.plot_data(grad_calc, grad)
+    title = st.sidebar.text_input("Enter the title of the graph")
+    plotter = Plotter(title, l_best, l_plt)
+    plotter.get_uploaded_file()
+    choices = plotter.getListofColumns()
+    x_axis = st.sidebar.selectbox("X-axis", choices)
+    y_axis = st.sidebar.selectbox("Y axis", choices)
+    number = st.sidebar.number_input("How many plots in one graph?", 1, 2)
+    if number == 2:
+        y_axis_1 = st.sidebar.selectbox("Y axis_2", choices)
+        x_axis = (x_axis, x_axis)
+        y_axis = (y_axis, y_axis_1)
+    plotter.plot_data( show_calculations=grad_calc, grad= grad, number=number, x_axis=x_axis, y_axis=y_axis)
+
