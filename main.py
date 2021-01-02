@@ -9,7 +9,7 @@ graph_icon = Image.open("graph.png")
 nav = ["Plotter", "Home", "Labs"]
 Part_A = ["Question 1a", "Question 1b"]
 
-instuctions = " 1.	Copy data into an excel sheet.\n 2.	Make sure that x-axis data is in the first column and the first cell of the column has the axis title.\n 3.	Save the sheet in .csv format.\n 4.	Name the file what you want as the Plot title.\n 5.	Upload the file.\n 6.	Change the plot preferences from the sidebar as required."
+instuctions = " 1.	Copy data into an excel sheet.\n 2.	Save the sheet in .csv format.\n 3.	Upload the file.\n 4. Change the plot preferences from the sidebar as required."
 
 with st.beta_expander("Navigation"):
     col1, col2= st.beta_columns(2)
