@@ -32,12 +32,15 @@ class Plotter:
             st.table(self.dataframe)
     
     def getListofColumns(self):
-        columns = list(self.dataframe)
-        self.headings = []
-        for head in columns:
-            self.headings.append(head.split(" ")[0])
-        self.gen_dict = {k: v for v, k in enumerate(self.headings)}
-        return self.headings
+        if self.dataframe is not None:
+            columns = list(self.dataframe)
+            self.headings = []
+            for head in columns:
+                self.headings.append(head.split(" ")[0])
+            self.gen_dict = {k: v for v, k in enumerate(self.headings)}
+            return self.headings
+        else:
+            return ["Upload Data to See Options"]
 
     def generate_graph(self, number: int, x_axis: str, y_axis: str):
         if self.dataframe is not None:
