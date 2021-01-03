@@ -81,7 +81,8 @@ class Plotter:
                     legend_title = "Legend"
                 )
                 st.plotly_chart(fig)
-                return True
+                img_bytes = fig.to_image(format="svg")
+                return True, img_bytes
             if number == 2:
                 self.slope_1, self.intercept_1, r_value, p_value, std_error = stats.linregress(
                     self.dataframe[self.columns[self.gen_dict[x_axis[0]]]], self.dataframe[self.columns[self.gen_dict[y_axis[0]]]])
@@ -142,9 +143,10 @@ class Plotter:
                 fig.update_yaxes(title_text = self.columns[self.gen_dict[y_axis[1]]], secondary_y=True)
 
                 st.plotly_chart(fig)
-                return True
+                img_bytes = fig.to_image(format="svg")
+                return True, img_bytes
 
-        return False
+        return False, None
     
     def gradient_calc(self, show_grad_calc = True):
         if show_grad_calc:
@@ -172,8 +174,9 @@ class Plotter:
             st.latex(fr"gradient = {round(self.slope, 4)}")
 
     def plot_data(self, number, x_axis, y_axis, show_calculations=False, grad = True):
-        state = self.generate_graph(number, x_axis, y_axis)
+        state, img_bytes = self.generate_graph(number, x_axis, y_axis)
         if grad:
             if state:
                 self.gradient_calc(show_calculations)
         else: pass
+        return img_bytes

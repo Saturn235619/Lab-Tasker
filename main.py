@@ -1,6 +1,8 @@
 import streamlit as st
 from plotter import Plotter
 from PIL import Image
+from helper_funcs import get_download_links
+import base64
 
 home_icon = Image.open("home.png")
 lab_icon = Image.open("lab (1).png")
@@ -58,7 +60,7 @@ if navi == "Plotter":
     grad_calc = st.sidebar.checkbox("Do you need to show calculations for gradient of Line of best fit?".title())
     title = st.sidebar.text_input("Enter the title of the graph")
     plotter = Plotter(title, l_best, l_plt)
-    plotter.get_uploaded_file()
+    dataframe = plotter.get_uploaded_file()
     choices = plotter.getListofColumns()
     x_axis = st.sidebar.selectbox("X-axis", choices)
     y_axis = st.sidebar.selectbox("Y axis", choices)
@@ -67,5 +69,6 @@ if navi == "Plotter":
         y_axis_1 = st.sidebar.selectbox("Y axis_2", choices)
         x_axis = (x_axis, x_axis)
         y_axis = (y_axis, y_axis_1)
-    plotter.plot_data( show_calculations=grad_calc, grad= grad, number=number, x_axis=x_axis, y_axis=y_axis)
+    img_bytes = plotter.plot_data( show_calculations=grad_calc, grad= grad, number=number, x_axis=x_axis, y_axis=y_axis)
+    st.sidebar.markdown(get_download_links(image=img_bytes), unsafe_allow_html=True)
 
